@@ -1,0 +1,88 @@
+Logitech RightSight Basic Install
+If you’re not familiar with Logitech RightSight, 
+it finds human figures within the camera’s field of view and automatically pans, 
+tilts, and zooms to comfortably frame everyone in the meeting. By focusing on people rather than the empty space around them, 
+RightSight makes eye contact and engagement feel easy and natural for more productive meetings.
+
+To Learn more, check out the Logitech RightSense Video on Logitech’s youtube page
+https://www.youtube.com/embed/-xGIqpPOyXs
+
+Our team has made it easy to enable RightSight for your Logitech Meetup cameras 
+with a set of commands that can be easily deployed with your own Device Management Tools. 
+
+The installer features standard switches that will allow you to deploy on a global scale.
+
+RightSight is packaged in a firmware update for Meetup that will update your Logitech Meetup 
+to the latest available version as well as enabling the auto-framing. 
+
+
+_________________________________________________________________________
+Here is a set of basic command line arguments that you can run or easily package into your preferred endpoint management tools 
+to update your Meetup Firmware and Install Rightsight.
+It is recommend you run these commands, or command prompt, using elevated/admin privileges.
+
+Before you run the update, it is recommended you shut down any meeting apps that may use the camera.
+In Windows, this can be easily achieved by running taskkill commands with the associated .exe for the application.
+Taskkill -> kills the task specified
+/f -> forces this command even if the task is running
+/im -> Allows you to specify the /exe name rather than the Process ID
+
+E.g.
+SkypeForBusiness: 
+taskkill /f /im lync.exe 
+
+
+Zoom
+taskkill /f /im zoom.exe
+ZoomRooms
+taskkill /f /im zoomrooms.exe
+Cisco Jabber
+taskkill /f /im CiscoJabber.exe
+MS Teams
+taskkill /f /im teams.exe
+Skype
+taskkill /f /im skype.exe
+SkypeForBusiness
+taskkill /f /im lync.exe 
+Skype Room System 
+taskkill /f /im Microsoft.SkypeRoomSystem.exe 
+
+For Skype Room System or Microsoft Teams, you will need to reboot the system after process is complete.
+
+If you run multiple meeting tools, 
+You can group the commands in a PowerShell script and run this via your device management tool before you run the update.
+
+
+There are two steps to silently install RightSight for MeetUp and update MeetUps firmware. 
+Below are the steps and options you have during the silent installation process. 
+
+
+Step One
+There are three options to enable RightSight at the time of installation:
+
+FWUpdateMeetup.exe /rs-dynamic=1 /S
+This will silently install the MeetUp firmware updater, and set RightSight to Dynamically keep participants in the frame.
+
+FWUpdateMeetup.exe /rs-ocs=1 /S
+This will silently install the MeetUp firmware updater, and activate RightSight to Autoframe the participants on Call Start, 
+or when the user clicks the Home button on the meetup remote control.
+
+FWUpdateMeetup.exe /rs-off=1 /S
+This will silently install the MeetUp firmware updater, but not activate RightSight.
+
+
+Step Two
+After the software has been installed, the MeetUp firmware can be updated silently with the following command.
+\ProgramFiles(x86)\Common Files\LogiShrd\LogiFirmwareUpdateTool-MeetUp\FWUpdateMeetUp.exe -silentupdate -ForceUpdate
+
+After installing the firmware the USB device will reset and you will be ready to go.
+
+--------------------------------------------------------
+
+
+
+
+To remove RightSight for PTZ control only via the Meetup Remote
+You can find and execute the following command:
+C:\Program Files\Logitech\Collaboration\Services\VideoCameraServiceUnInst.exe
+Running this application will uninstall the  Logitech camera services 
